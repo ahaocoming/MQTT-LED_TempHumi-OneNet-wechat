@@ -1,0 +1,65 @@
+<!-- index.wxml -->
+<view class="page-container">
+<!-- 头部天气 -->
+<view class="header-container">
+    <view class="header-1">
+      <view>空气质量</view>
+      <view>气温</view>
+      <view>河北-邯郸市</view>
+    </view>
+    <view class="header-2">
+      <view>56良</view>
+      <view>30℃</view>
+      <view>多云</view>
+    </view>
+    <view class="header-3">
+      <view>注意防晒</view>
+    </view>
+  </view>
+
+  <!-- 中间数据 -->
+  <view class="data-container">
+    <!-- 数据项：设备状态 -->
+    <view class="data-item device-status">
+      <image src="/图片/设备状态.png" class="data-picture"/>
+      <view class="data-text">
+        <view class="data-title">设备状态</view>
+        <view class="data-value" wx:if="{{device_status.data.list[0].status == 1}}">在线</view>
+        <view class="data-value" wx:elif="{{device_status.data.list[0].status != 1}}" style="color: red;">离线</view>
+      </view>
+    </view>
+    <!-- 数据项：LED开关 -->
+    <view class="data-item LED0-switch">
+      <image src="/图片/灯.png" class="data-picture"/>
+      <view class="data-text">
+        <view class="data-title">灯开关</view>
+        <view class="data-value">
+          <switch checked="{{switch_checked}}" 
+                  bindchange="onenet_set_device_property" 
+                  data-param="LED0"
+                  color="#3d77ff"
+                  disabled="{{isUpdating}}"
+          />
+        </view>
+      </view>
+    </view>
+    <!-- 数据项：环境温度 -->
+    <view class="data-item environment-temperature">
+      <image src="/图片/温度.png" class="data-picture"/>
+      <view class="data-text">
+        <view class="data-title">环境温度</view>
+        <view class="data-value">{{onenet_data.data[2].value}}℃</view>
+      </view>
+    </view>
+
+    <!-- 数据项：环境湿度 -->
+    <view class="data-item environment-humidity">
+      <image src="/图片/湿度.png" class="data-picture"/>
+      <view class="data-text">
+        <view class="data-title">环境湿度</view>
+        <view class="data-value">{{onenet_data.data[1].value}}%</view>
+      </view>
+    </view>
+
+  </view>
+</view>
